@@ -1,0 +1,59 @@
+#pragma once
+class Persona
+{
+private:
+	int ci;
+	int edad;
+
+public:
+	Persona(int _edad, int _ci);
+	~Persona(void);
+	void leer();
+	void correr();
+};
+
+
+
+#include "StdAfx.h"
+#include "Persona.h"
+#include <iostream>
+
+using namespace std;
+
+Persona::Persona(int _edad, int _ci)
+{
+	edad=_edad;
+	ci=_ci;
+}
+
+void Persona::leer()
+{
+	cout << " soy " << ci << " estoy leyendo ";
+}
+void Persona::correr ()
+{
+	cout <<" soy " << ci <<" tengo " << edad << " estoy corriendo ";
+}
+Persona::~Persona(void)
+{
+}
+
+
+#include "stdafx.h"
+#include "Persona.h"
+#include <iostream>
+#include "conio.h"
+
+using namespace std;
+
+int _tmain()
+{
+	Persona P1 (23, 4370);
+	P1.leer();
+	P1.correr();
+
+	getch();
+
+	
+}
+
