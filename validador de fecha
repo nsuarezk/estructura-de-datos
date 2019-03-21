@@ -1,0 +1,254 @@
+Validador.h
+#pragma once
+#include "Fecha.h"
+
+class Validador
+{
+public:
+	Validador(void);
+	~Validador(void);
+
+	bool esFechaValida (Fecha f);
+};
+
+
+
+Validador.cpp
+#include "StdAfx.h"
+#include "Validador.h"
+
+
+Validador::Validador(void)
+{
+}
+
+
+Validador::~Validador(void)
+{
+}
+
+bool Validador::esFechaValida(Fecha f)
+{
+	int d = f.getDia ();
+	int m = f.getMes ();
+	int a = f.getAnho ();
+
+	//-------------      -  En  Fe  Mar Ab  Ma  J   Ju  Ag  Se  Oc  No  Di
+	int diasDelMes [] = {0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+
+	if (a % 4 == 0 && a % 100 == 0 && a % 400 == 0)
+	{
+		diasDelMes [2]++;
+	}
+	
+	if (a > 0 && (m >= 1 && m <= 12) && ( d >= 1 && d <= diasDelMes [m]))
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+
+	if (a < 0) return false;
+	if (m < 1 || m > 12) return false;
+	if (d < 1 || d > diasDelMes [m]) return false;
+
+	return true;
+}
+
+
+Fecha.h
+#pragma once
+#include <string>
+
+using namespace std;
+
+class Fecha
+{
+
+private:
+	int dia;
+	int mes;
+	int anho;
+
+public:
+	Fecha(void);
+	~Fecha(void);
+
+	Fecha (string cad);
+	Fecha (int f);
+	Fecha (int d, int m, int a);
+
+	//metodos de acceso
+	int getDia ();
+	int getMes ();
+	int getAnho ();
+};
+
+
+Fecha.cpp
+#include "StdAfx.h"
+#include "Fecha.h"
+
+int invertir (int k)
+{
+	int respuesta = 0;
+	while (k>0)
+	{
+		respuesta = (respuesta * 10) + k % 10;
+		k /= 10;
+	}
+	return respuesta;
+}
+
+
+Fecha::Fecha(void)
+{
+}
+
+
+Fecha::~Fecha(void)
+{
+}
+
+
+
+
+Fecha::Fecha(string cad)
+{
+	string sdia = cad.substr (0,2);
+	string smes = cad.substr (3,2);
+	string sanho = cad.substr (6,4);
+
+	dia = 0;
+	for (int i = 0 ; i < (int)sdia.length() ; ++i)
+	{
+		dia = (dia * 10) + (sdia[i] - '0');
+	}
+
+	mes = 0;
+	for (int i = 0 ; i < (int)smes.length() ; ++i)
+	{
+		mes = (mes * 10) + (smes[i] - '0');
+	}
+
+	anho = 0;
+	for (int i = 0 ; i < (int)sanho.length() ; ++i)
+	{
+		anho = (anho * 10) + (sanho[i] - '0');
+	}
+}
+
+
+Fecha::Fecha (int f)
+{
+	int cnt = 0, d;
+	anho = 0;
+	while (cnt < 4) 
+	{
+		d = f % 10;
+		anho = anho * 10 + d;
+		f = f / 10;
+		++cnt;
+	}
+	anho = invertir(anho);
+
+	cnt = 0;
+	mes = 0;
+	while (cnt < 2) 
+	{
+		d = f % 10;
+		mes = mes * 10 + d;
+		f = f / 10;
+		++cnt;
+	}
+	mes = invertir(mes);
+
+	cnt = 0;
+	dia = 0;
+	while (cnt < 2) 
+	{
+		d = f % 10;
+		dia = dia * 10 + d;
+		f = f / 10;
+		++cnt;
+	}
+	dia = invertir(dia);
+}
+
+
+
+
+
+
+
+Fecha::Fecha (int d, int m, int a)
+{
+	dia = d;
+	mes = m;
+	anho = a;
+}
+
+int Fecha::getDia ()
+{
+	return dia;
+}
+
+int Fecha::getMes ()
+{
+	return mes;
+}
+
+int Fecha::getAnho ()
+{
+	return anho;
+}
+
+EjemFecha.cpp
+
+#include "stdafx.h"
+#include <string>
+#include <iostream>
+#include "Fecha.h"
+#include "Validador.h"
+
+using namespace std;
+
+int _tmain(int argc, _TCHAR* argv[])
+{
+	string s;
+	cout <<"introduzca la fecha: ";
+	cin >> s;
+	Fecha var1 (s);
+	cout << var1.getDia () << ' ' << var1.getMes () << ' ' << var1.getAnho () << endl;
+
+	/*int f;
+	cout <<"introduzca la fecha: ";
+	cin >> f;
+	Fecha var2 (f);
+	cout << var2.getDia () << ' ' << var2.getMes () << ' ' << var2.getAnho () << endl;
+
+	int d, m, a;
+	cout <<"introduzca la fecha: ";
+	cin >> d >> m >> a;
+	Fecha var3(d, m, a);*/
+
+
+	Validador obj;
+	if (obj.esFechaValida (var1)==true)
+	{
+		cout <<"La fecha si es valida" << endl;
+	}
+
+
+	else
+	{
+		cout << "La fecha no es valida" << endl;
+	}
+
+	cin.ignore();
+
+	return 0;
+}
+
