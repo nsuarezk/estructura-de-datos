@@ -1,0 +1,87 @@
+Palíndromo.h
+#pragma once
+#include <iostream>
+#include <string>
+using namespace std;
+
+class Palindromo
+{
+	
+private:
+	string frase;
+public:
+	Palindromo(void);
+	~Palindromo(void);
+	bool verificarpalindromo ();
+};
+
+
+
+Palíndromo.cpp
+#include "stdafx.h"
+#include "Palindromo.h"
+#include <iostream>
+#include <string>
+using namespace std;
+
+
+Palindromo::Palindromo()
+{
+	//frase = "oso";
+	cin >> frase;
+}
+
+
+Palindromo::~Palindromo()
+{
+
+}
+
+bool Palindromo::verificarpalindromo ()
+{
+	bool aux=true;
+	for (int i=0 ; i<frase.length()/2 ; i++)
+	{
+		if (frase [i] != frase [frase.length () -1 -i])
+		{ 
+			aux = false;
+		    return aux;
+		}
+	}
+	return aux;
+}
+
+
+
+
+Ejempalindromo.cpp
+#include "stdafx.h"
+#include "Palindromo.h"
+#include <iostream>
+//#include "conio.h"
+using namespace std;
+
+
+void main ()
+{
+	char resp;
+	//Palindromo p1;
+	resp = 's';
+	while (resp == 's')
+	{
+		Palindromo p1;
+	      if (p1.verificarpalindromo ())
+		  {
+		      cout <<"es Palindromo" << endl;
+		  }
+		  else
+		  {
+		      cout <<"no es palindromo" << endl;
+		  }
+		cout << "hay mas palabras?";
+		cin >> resp;
+
+	}
+	//getch ();
+	system ("pause");
+}
