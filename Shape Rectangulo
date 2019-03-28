@@ -1,0 +1,75 @@
+Shape.h
+#pragma once
+
+class Shape
+{
+protected:
+	int width;
+	int height;
+
+public:
+	void setWidth (int w);
+	void setHeight (int h);
+};
+
+
+Shape.cpp
+#include "StdAfx.h"
+#include "Shape.h"
+
+
+void Shape::setWidth (int w)
+{
+	width = w;
+}
+
+
+void Shape::setHeight (int h)
+{
+	height = h;
+}
+
+
+Rectangulo.h
+#pragma once
+#include "Shape.h"
+
+class Rectangulo: public Shape
+{
+public:
+	Rectangulo (void);
+	~Rectangulo (void);
+	int getArea ()
+	{
+		return (width * height);
+	}
+};
+
+
+
+
+
+EjemploHerencia.cpp
+#include "stdafx.h"
+#include <iostream>
+#include "Rectangulo.h"
+#include "conio.h"
+
+using namespace std;
+
+int main (void)
+{
+	int base, altura, area;
+
+	Rectangulo r1;
+	cout << "ingresar base: ";
+	cin >> base;
+	cout << "ingrese altura :";
+	cin >> altura;
+	r1.setWidth (base);
+	r1.setHeight (altura);
+	area = r1.getArea ();
+	//muestra el area de un rectangulo
+	cout << "total area: " << area << endl;
+	getch ();
+}
