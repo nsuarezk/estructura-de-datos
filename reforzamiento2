@@ -1,0 +1,158 @@
+# estructura-de-datos
+
+#pragma once
+class Matriz
+{
+private:
+	int Mat [30][30];
+	int m;
+	int n;
+public:
+	Matriz(int _m, int _n);
+	~Matriz(void);
+	void cargar ();
+	void mostrar ();
+	void devolver (int A [30][30]);
+	void Diagonal ();
+	bool Verificar ();
+	int SumarDiagonal ();
+	int DevolverFila ();
+
+};
+
+#include "StdAfx.h"
+#include "Matriz.h"
+#include <iostream>
+
+using namespace std;
+
+
+Matriz::Matriz(int _m, int _n)
+{
+	m = _m;
+	n = _n;
+
+}
+
+
+Matriz::~Matriz(void)
+{
+}
+
+void Matriz::cargar ()
+{
+	for (int i=0 ; i<m ; i++)
+	{
+		for (int j=0 ; j<n ; j++)
+		{
+			cout << "MAT ["<<i<<"]["<<j<<"] = ";
+			cin >> Mat [i][j];
+		}
+	}
+}
+
+void Matriz::mostrar ()
+{
+	for (int i=0 ; i<m ; i++)
+	{
+		for (int j=0 ; j<n ; j++)
+		{
+			cout << Mat[i][j] << "\t" ;
+		}
+		cout << endl;
+	}
+}
+
+void Matriz::devolver(int A [30][30])
+{
+	for (int i=0 ; i<m ; i++)
+	{
+		for (int j=0 ; j<n ; j++)
+		{
+			A [i][j] = Mat [i][j];
+		}
+	}
+}
+
+void Matriz::Diagonal ()
+{
+	for (int i=0 ; i<m ; i++)
+	{
+		cout << Mat [i][i] << endl;
+	}
+}
+
+bool Matriz::Verificar ()
+{
+	if (m == n)
+	{
+		return true;
+	}
+	else 
+	{
+		return false;
+	}
+}
+
+
+int Matriz::SumarDiagonal ()
+{
+	int s = 0;
+	for (int i=0 ; i<m ; i++)
+	{
+		s = s + Mat [i][i];
+	}
+	return s;
+}
+
+int Matriz::DevolverFila ()
+{
+	return m;
+}
+
+
+
+
+
+#include "stdafx.h"
+#include "Matriz.h"
+#include <iostream>
+#include "conio.h"
+
+using namespace std;
+
+void main ()
+{
+	int Mat [30][30];
+	int fil, col;
+	do
+	{
+		cout<<"Ingrese el numero de filas: ";
+		cin>>fil;
+		cout<<"Ingrese el numero de columnas: ";
+		cin>>col;
+	}
+	while(fil<=0,col<=0);
+	Matriz d1(fil,col);
+	//Matriz d2(fil,col);
+	d1.cargar();
+	//d2.cargar();
+	if (d1.Verificar ())
+		d1.Diagonal();
+	else 
+		cout <<"no es una matriz cuadrada \n\n";
+	//if (d2.Verificar ())
+		//d2.Diagonal();
+	//else 
+		//cout <<"no es una matriz cuadrada \n\n";
+
+	cout << " la suma de la diagonal es: \n\n" << d1.SumarDiagonal ();
+	//cout << " la suma de la diagonal es: \n\n" << d2.SumarDiagonal ();
+	cout<<"\n\n La matriz es: \n\n";
+	d1.mostrar();
+	//d2.mostrar();
+	cout << "\n\n la filas son: \n\n" << d1.DevolverFila ();
+
+	getch();
+}
+
