@@ -1,0 +1,148 @@
+# estructura-de-datos
+
+
+#pragma once
+#include <iostream>
+#include <string>
+using namespace std;
+const int N = 20;
+const int M = 30;
+
+class MATRIZ
+{
+	double matriz [N] [M];
+	int fila, columna;
+public:
+	//constructor
+	MATRIZ(void);
+	//metodos de acceso
+	double Get_matriz (int f, int c);
+	void Set_matriz (int f, int c, double valor);
+    int Get_fila ();
+	int Get_columna ();
+	void Set_fila (int f);
+	void Set_columna (int c);
+	//operaciones
+	void Insertar_fila (int f, double valor);
+	void Insertar_columna (int c, double valor);
+	void Insertar_ordenadamente (double valor);
+
+};
+
+
+
+#include "StdAfx.h"
+#include "MATRIZ.h"
+
+
+MATRIZ::MATRIZ(void)
+{
+}
+
+
+
+	//metodos de acceso
+	double MATRIZ::Get_matriz (int f, int c)
+	{
+		return matriz [f] [c];
+	}
+
+	void MATRIZ::Set_matriz (int f, int c, double valor)
+	{
+		matriz [f] [c] = valor;
+	}
+
+    int MATRIZ::Get_fila ()
+	{
+		return fila;
+	}
+
+	int MATRIZ::Get_columna ()
+	{
+		return columna;
+	}
+
+	void MATRIZ::Set_fila (int f)
+	{
+		fila = f;
+	}
+
+	void MATRIZ::Set_columna (int c)
+	{
+		columna = c;
+	}
+
+
+	//operaciones
+
+	void MATRIZ::Insertar_fila (int f, double valor)
+	{
+		int j;
+		j = Get_fila();
+		
+		while ((j > 0)&&(Get_matriz (f, j-1) > valor))
+		{
+			matriz [f][j] = matriz [f][j-1];
+			j--;
+
+		}
+	}
+
+	void MATRIZ::Insertar_columna (int c, double valor)
+	{
+		int i;
+		i = Get_columna();
+		
+		while ((i > 0)&&(Get_matriz (c, i-1) > valor))
+		{
+			matriz [c][i] = matriz [c][i-1];
+			i--;
+
+		}
+
+		matriz [c][i] = valor;
+	}
+
+
+	void MATRIZ::Insertar_ordenadamente (double valor)
+	{
+		int i,j;
+		i = 0;
+		encontro = false;
+		while (( i < Get_fila()) && (encontro == false))
+		{
+			j = 0;
+			while (((j < Get_columna)) && (encontro == false))
+			{
+				if (valor < Get_matriz (i,j))
+				{
+				    buscando_fila = i;
+	                buscando_columna = j;
+				    encontro = true;
+				}
+			    
+				j++;			
+			}
+			
+			i++;
+	    }
+
+	    i = Get_fila();
+	    while (i > buscado_fila)
+	    {
+		    j = Get_columna();
+			valor_ultima_fila = matriz [i][j];
+		    while (j > buscado_columna)
+		    {
+				matriz [i][j] = [i][j-1];
+
+			    j--;
+		    }
+
+		    i--;
+	     }
+
+	     matriz [buscado_fila][buscado_columna] = valor;
+	}
+
+
