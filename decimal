@@ -1,0 +1,25 @@
+# estructura-de-datos
+
+#include "stdafx.h"
+#include <iostream>
+using namespace std;
+
+void main ()
+{
+	int numero, digito, posicion=0, resultado=0;
+	int vector[]={1,2,4,8,16,32,64,128,256}
+	cout<< "ingrese el numero: ";
+	cin >> "&i", &numero;
+	while (numero>0)
+	{
+		digito = numero%10;
+		if (digito==1)
+			resultado = resultado + vector [posicion];
+		posicion ++;
+		numero = numero/10;
+	}
+	cout<< "el resultado es %i: ", resultado;
+	system ("pause");
+}
+
+		
