@@ -1,0 +1,137 @@
+# estructura-de-datos
+
+#pragma once
+#define MAX 100
+
+class Pila
+{
+private: 
+	int V [MAX];
+	int tope;
+
+public:
+	Pila(void);
+	~Pila(void);
+	bool apilar (int elemento);
+	bool desapilar (int &elemento);
+	bool mostrarpila ();
+};
+
+
+
+
+
+#include "StdAfx.h"
+#include "Pila.h"
+#include <iostream>
+#define MAX 100
+
+using namespace std;
+
+Pila::Pila(void)
+{
+	tope = -1;
+}
+
+
+Pila::~Pila(void)
+{
+}
+
+bool Pila::apilar (int elemento)
+{
+	if (tope == MAX -1)
+	{
+		cout <<" la pila esta llena";
+		return false;
+	}
+	else 
+	{
+		tope ++;
+		V[tope] = elemento;
+		return true;
+	}
+}
+
+bool Pila::desapilar (int &elemento)
+{
+	if (tope == -1)
+	{
+		cout <<" la pila esta vacia ";
+		return false;
+	}
+	else
+	{
+		elemento = V[tope];
+		tope--;
+	}
+	return false;
+}
+
+
+bool Pila::mostrarpila ()
+{
+	for (int i=0 ; i<tope ; i++)
+	{
+		cout << V[i] << endl;
+	}
+}
+
+
+
+
+
+
+
+
+#include "stdafx.h"
+#include "Pila.h"
+#include <iostream>
+#include "conio.h"
+
+using namespace std;
+
+
+void main ()
+{
+	int op, tope, x;
+	Pila pila1;
+	do
+	{
+		cout <<" ------ MENU ------ " << endl;
+		cout <<"1. apilar           " << endl;
+		cout <<"2. desapilar        " << endl;
+		cout <<"3. mostrar          " << endl;
+		cout <<"4. salir            " << endl;
+		cin >> op;
+
+		switch (op)
+		{
+		case 1:
+			{
+				if (pila1.apilar() == false)
+				{
+					cout << "ingrese dato: " << endl;
+					cin >> x;
+					pila1.apilar (x);
+				}
+				else
+				{
+					cout << " pila llena" << endl;
+				}
+				break;
+			}
+
+
+		case 2:
+			{
+				if (pila1.desapilar() == false)
+				{
+					pila1.desapilar ();
+				}
+				else
+				{
+					cout << " pila vacia" << endl;
+				}
+				break;
+
