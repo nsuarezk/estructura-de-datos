@@ -1,0 +1,141 @@
+# estructura-de-datos
+vector.h
+
+#pragma once
+#include <iostream>
+#include <string>
+using namespace std;
+const int N=30;
+class VECTOR
+{
+private:
+	string vector [N];
+	int tamano;
+public:
+	//metodos de acceso
+	string Get_vector (int posicion);
+	void Set_vector (int posicion, string valor);
+	int Tamano();
+	void Tamano (int t);
+	//metodos de opercion del objeto
+	bool Vacio();
+	bool Lleno ();
+	void Insertar (int posicion, string valor);
+	bool Verificar (int posicion);
+	string Eliminar (int posicion);
+	
+	
+	
+	VECTOR(void);
+
+};
+
+vector.cpp
+
+#include "StdAfx.h"
+#include "VECTOR.h"
+
+
+VECTOR::VECTOR(void)
+{
+	tamano=0;
+	int i=0;
+	while (i<N)
+	{
+	     vector[i]=" ";
+		 i++;
+	}
+}
+
+
+    string VECTOR::Get_vector (int posicion)
+	{
+		return vector[posicion];
+	}
+
+	void VECTOR::Set_vector (int posicion, string valor)
+	{
+		vector[posicion]=valor;
+	}
+
+	int VECTOR::Tamano()
+	{
+		return(tamano);
+	}
+
+	void VECTOR::Tamano (int t)
+    {
+		tamano=t;
+    }
+
+	//metodos de opercion del objeto
+
+	bool VECTOR::Vacio()
+	{
+		if (tamano==0) 
+		{
+			return true;
+		}
+		else 
+	    {
+			return false;
+		}
+	}
+
+	bool VECTOR::Lleno ()
+	{
+		if (tamano==N) 
+		{
+			return true;
+		}
+		else 
+	    {
+			return false;
+		}
+
+	}
+
+	void VECTOR::Insertar (int posicion, string valor)
+	{
+		int i;
+		i=Tamano();
+		while (i>posicion)
+		{
+			vector[i]=vector[i-1];
+			i--;
+		}
+		vector[posicion]=valor;
+		tamano=tamano+1;
+
+	}
+
+	string VECTOR::Eliminar (int posicion)
+	{
+		string valor;
+		int i;
+		valor=vector[posicion];
+		i=posicion;
+		while(i<Tamano())
+		{
+			vector[i]=vector[i+1];
+			i++;
+		}
+		Tamano(tamano-1); //tamano = tamano - 1, tamano--;
+		return valor;
+	}
+
+
+	bool VECTOR::Verificar (int posicion)
+	{
+		if ((posicion>=0) && (posicion<Tamano()+1))
+		{
+			return true;
+		}
+		else 
+		{
+			return false;
+		}
+	}
+
+
+	
