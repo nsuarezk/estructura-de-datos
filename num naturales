@@ -1,0 +1,79 @@
+  # estructura-de-datos
+  
+  
+  #pragma once
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+class numeros_naturales
+{
+private:
+	int numero;
+
+public:
+	// constructor
+
+	numeros_naturales(void);
+
+	// metodos de acceso
+
+	int Get_numero ();
+	void Set_numero (int);
+
+	//metodos operaciones
+
+	void Eliminar_repetidos ();
+};
+
+
+
+
+#include "StdAfx.h"
+#include "numeros_naturales.h"
+
+
+numeros_naturales::numeros_naturales(void)
+{
+	numero = 0;
+}
+
+int numeros_naturales::Get_numero()
+{
+	return numero;
+}
+
+void numeros_naturales::Set_numero(int n)
+{
+	numero = n;
+}
+
+//metodos operaciones
+
+void numeros_naturales::Eliminar_repetidos()
+{
+	numeros_naturales aux1,aux2;
+	int digito1, digito2;
+	numeros_naturales resultado;
+	int nuevo;
+	aux1.numero = numero;
+	while (aux1.numero > 0)
+	{
+		digito1 = aux1.numero%10;
+		aux1.numero = aux1.numero/10;
+		aux2 = aux1;
+		while (aux2.numero > 0)
+		{
+			digito2 = aux2.numero%10;
+			aux2.numero = aux2.numero/10;
+			if (digito1 != digito2)
+			{
+				nuevo = nuevo*10+digito2;
+			}
+		}
+		aux1.numero=nuevo;
+		resultado.numero = resultado.numero*10+digito1;
+	}
+	numero = resultado.numero;
+}
